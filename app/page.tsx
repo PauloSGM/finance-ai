@@ -1,8 +1,14 @@
-import { Button } from "./_components/ui/button";
+import { UserButton } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
 
-const Home = () => {
+const Home = async () => {
+  const { userId } = await auth();
+  if (!userId) {
+    redirect("/login");
+  }
   return (
-  <Button>Botão</Button>)
+  <UserButton showName></UserButton>)
   ;
 }
 
